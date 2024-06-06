@@ -1,5 +1,7 @@
-const TransactionHistory = ({}) => {
-    <div>Transaction History Page</div>
+const TransactionHistory = () => {
+    return (
+        <div>Transaction History Page</div>
+    )
 }
 
 export default TransactionHistory
