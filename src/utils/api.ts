@@ -27,4 +27,5 @@ const apiFetch = async (endpoint: string, options: RequestInit = {}) => {
     return response;
 };
 
+
 export default apiFetch;

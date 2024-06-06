@@ -14,6 +14,7 @@ interface UserContextType {
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const useUser = (): UserContextType => {
+
     const context = useContext(UserContext);
     if (!context) {
         throw new Error('useUser must be used within a UserProvider');
@@ -24,12 +25,15 @@ export const useUser = (): UserContextType => {
 export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
         const accessToken = localStorage.getItem('accessToken');
         if (accessToken) {
             setIsAuthenticated(true);
-            fetchUserInfo();
+            fetchUserInfo().finally(() => setIsLoading(false));
+        } else {
+            setIsLoading(false);
         }
     }, []);
 
@@ -90,6 +94,10 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         setUser(null);
         setIsAuthenticated(false);
     };
+
+    if (isLoading) {
+        return <div>Loading...</div>; // Add a loading state while checking authentication
+    }
 
     return (
         <UserContext.Provider value={{ user, isAuthenticated, login, logout, fetchUserInfo }}>

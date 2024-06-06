@@ -5,6 +5,8 @@ module.exports = {
     extend: {
       colors:{
         'ziinaViolet': "rgb(206, 84, 255)",
+        'ziinaGrey':"#ffffff80",
+        'ziinaGreen': "#5df29d"
       }
     },
   },

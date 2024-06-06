@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
 import Login from './pages/Login';
 import TransactionHistory from './pages/TransactionHistory';
 
@@ -13,13 +13,13 @@ const App: React.FC = () => {
                 <Router>
                     <Header />
                     <Routes>
-                        <Route path="/login" element={<Login />} />
                         <Route path="/account" element={
                             <ProtectedRouteWrapper>
                                 <TransactionHistory/>
                             </ProtectedRouteWrapper>
                         } />
-                        <Route path="*" element={<Login />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="*" element={<DefaultRoute />} />
                     </Routes>
                 </Router>
         </UserProvider>
@@ -28,7 +28,15 @@ const App: React.FC = () => {
 
 const ProtectedRouteWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const { isAuthenticated } = useUser();
+    console.log('ici', isAuthenticated)
     return <ProtectedRoute isAuthenticated={isAuthenticated}>{children}</ProtectedRoute>;
+};
+
+const DefaultRoute: React.FC = () => {
+    const { isAuthenticated } = useUser();
+
+    console.log('la', isAuthenticated);
+    return isAuthenticated ? <Navigate to="/account" /> : <Login />;
 };
 
 
