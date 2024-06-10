@@ -29,16 +29,7 @@ const TransactionDetail = ({ transaction, onClose }: TransactionDetailProps) => 
                     {transaction.message && <Pill message={transaction.message}/>}
 
                 </div>
-                <div className="p-4 border rounded mb-2">
-                    <h3>{transaction.header}</h3>
 
-
-                    <p>Type: {transaction.type}</p>
-                    <p>Status: {transaction.isPending ? 'Pending' : 'Completed'}</p>
-                    <p>Date: {new Date(transaction.createdAt).toLocaleString()}</p>
-                    {transaction.message && <p>Message: {transaction.message}</p>}
-                    {transaction.avatarUrl && <img src={transaction.avatarUrl} alt="User Avatar"/>}
-                </div>
             </div>
         </div>
     )

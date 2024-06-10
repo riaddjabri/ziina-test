@@ -1,6 +1,6 @@
 import React from "react";
 
-type PillType = {
+export type PillType = {
     message: string
 }
 const Pill = ({message}: PillType) => (
