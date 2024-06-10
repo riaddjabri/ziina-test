@@ -19,7 +19,7 @@ const TransactionHistory = () => {
         }
 
         try {
-            const response = await apiFetch('/transactions?perPage=10&page=1');
+            const response = await apiFetch('/transactions?perPage=17&page=1');
 
             if (response.ok) {
                 const transactionsData: TransactionsList = await response.json();
